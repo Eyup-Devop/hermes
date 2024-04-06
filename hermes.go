@@ -17,6 +17,11 @@ type Hermes struct {
 	TextDirection      TextDirection
 	Product            Product
 	DisableCSSInlining bool
+	Header             Header
+}
+
+type Header struct {
+	BackgroundColor string
 }
 
 // Theme is an interface to implement when creating a new theme
@@ -95,8 +100,9 @@ type Table struct {
 
 // Columns contains meta-data for the different columns
 type Columns struct {
-	CustomWidth     map[string]string
-	CustomAlignment map[string]string
+	CustomWidth      map[string]string
+	CustomAlignment  map[string]string
+	CustomFontWeight map[string]string
 }
 
 // Action is anything the user can act on (i.e., click on a button, view an invite code)
@@ -186,7 +192,6 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
-
 	err := setDefaultEmailValues(&email)
 	if err != nil {
 		return "", err
